@@ -59,9 +59,6 @@
               Submit</button>
           </form>
           <br>
-          <div class="col-12">
-            No Account? <a href="/new">Click here</a> to make an account.
-          </div>
           <br>
 
         </div>
@@ -92,18 +89,18 @@
         .then(response => response.json())
         .then(body => {
           console.log(body);
-          if (body === 'Wrong username or password') {
+          //if (body === 'Wrong username or password') {
             // Create a message that tells our user wrong username or password
-            const errorMessage = document.createElement('p');
-            errorMessage.innerHTML = body.fontcolor("red");
+            //const errorMessage = document.createElement('p');
+            //errorMessage.innerHTML = body.fontcolor("red");
 
-            document.getElementsByClassName('modal-content')[0].appendChild(errorMessage);
+            //document.getElementsByClassName('modal-content')[0].appendChild(errorMessage);
 
 
-          } else {
+          //} else {
             // Redirect user on button click 
-            window.location.href = "Encryption.html";
-          }
+            window.location.href = "/Encryption";
+          //}
 
 
         })

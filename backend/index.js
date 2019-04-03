@@ -64,7 +64,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (request, response) => {
-  response.json('All of my tweets from a database');
+  response.json('All of my passwrods from a database');
+});
+
+app.get('/login', (request, response) => {
+  response.sendFile(__dirname + "/pages/Login.html");
+});
+
+app.get('/new', (request, response) => {
+  response.sendFile(__dirname + "/pages/New.html");
+});
+
+app.get('/home', (request, response) => {
+  response.sendFile(__dirname + "/pages/home.html");
+});
+
+app.get('/encryption', (request, response) => {
+  response.sendFile(__dirname + "/pages/Encryption.html");
 });
 
 app.post('/login', (request, response) => {
@@ -81,6 +97,17 @@ app.post('/login', (request, response) => {
       } else {
         response.json(user);
       }
+    });
+});
+
+app.post('/new', (request, response) => {
+  console.log(request.body.username);
+  User.create({
+        username: request.body.username,
+        password: request.body.password
+      })
+    .then((user) => {
+      response.json(user);
     });
 });
 

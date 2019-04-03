@@ -1,0 +1,134 @@
+<!-- For everything but the Caesar Cipher, we will use the CryptoJS library for our encryption algorithms -->
+
+
+<!DOCTYPE html>
+<html>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+     <a  href="#"class="navbar-brand"><i class="fas fa-lock">   Password Encryptor</i></a>
+       <ul class="navbar-nav mr-auto">
+         <li class="nav-item">
+           <a href="#" class="nav-link">Saved Passwords</a>
+         </li>
+         <li class="nav-item">
+           <a href="#" class="nav-link">Create Password</a>
+         </li>
+       </ul>
+   </nav>
+<head>
+
+	<title>Encryption Page</title>
+</head>
+<body>
+    <div class="container-fluid">
+      <h3>
+        Create Password
+      </h3>
+    </div>
+    <br>
+      <div class="card bg-light text-dark">
+      <div class="card-body">This page allows you to encrypt a password using an encryption algorithm of your choice. Just enter your plaintext password in the box below, select the algorithm you'd like to use, and click the encrypt button.</div>
+      <br>
+    </div>
+
+    <div class="container-fluid">
+      <br>
+      <b>Password:</b><br>
+      <input type="text" id="password" name="password" placeholder="Enter Your Password"> 
+      <script type="text/javascript">
+      	function myJsFunction(){
+      		var text=document.getElementById("password").value;
+ 		}
+ 	    </script>
+      <br>
+      <br>
+    <b>Choose the Encryption Algorithm You Wish To Use From the Following Options:</b><br>
+      <select id="question" name="question">
+      <option value="SHA-2">SHA-2</option>
+      <option value="SHA-512">SHA-512</option>
+      <option value="AES">AES</option>
+      </select>
+      <br>
+      <br>
+      <br>
+      <!-- Button to trigger encryption -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onClick="pr()">
+        Encrypt!
+      </button>
+      <br>
+      <br>
+      <b>Your Encrytpted Password Is:</b><br> 
+      <output type="text" id="out"></output>
+      <script>
+          function pr() {
+            
+            var question = $("#question").val();
+
+            if (question == "SHA-2") {
+              var pass=document.getElementById("password").value;
+              var hash = CryptoJS.HmacSHA256(pass, "Crypto");
+              var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
+              hash = hashInBase64
+              document.getElementById("out").innerHTML = hash;
+
+            } else if (question == "AES") {
+              var pass=document.getElementById("password").value;
+              var hash = CryptoJS.AES.encrypt(pass, "Crypto");
+              document.getElementById("out").innerHTML = hash;
+
+            } else if (question == "SHA-512") {
+              var pass=document.getElementById("password").value;
+              var hash = CryptoJS.SHA512(pass, "Crypto");
+              var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
+              hash = hashInBase64
+              document.getElementById("out").innerHTML = hash;
+            }
+        }
+      </script>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <a href="home.html" class="btn btn-info" role="button" >Logout</a>
+
+
+
+</body>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script><!DOCTYPE html>
+
+<!-- Crypto -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+<script src=”http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac-sha256.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/enc-base64.min.js"></script>
+
+<script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/core-min.js"></script>
+
+<script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+
+<!-- ajax -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
