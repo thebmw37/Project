@@ -39,15 +39,9 @@ const User = db.define('user', {
   }
 });
 
-// Sync up our User table that we just created with the database
+// Sync up User table that we just created with the database
 User.sync()
   .then(() => {
-    User.create(
-      {
-        username: 'user1',
-        password: 'crypto1'
-      }
-    );
   });
 
 

@@ -78,7 +78,7 @@
       // Define the method (GET,POST, UPDATE, DELETE)
       // If POST request, define the content type (what data type is the information you're sending in going to be )
       // If POST request, send in that information via the body 
-      fetch('http://localhost:3000/login', {
+      fetch('http://localhost:3000/new', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -89,19 +89,8 @@
         .then(response => response.json())
         .then(body => {
           console.log(body);
-          //if (body === 'Wrong username or password') {
-            // Create a message that tells our user wrong username or password
-            //const errorMessage = document.createElement('p');
-            //errorMessage.innerHTML = body.fontcolor("red");
-
-            //document.getElementsByClassName('modal-content')[0].appendChild(errorMessage);
-
-
-          //} else {
             // Redirect user on button click 
             window.location.href = "/Encryption";
-          //}
-
 
         })
         .catch(err => console.log(err));
