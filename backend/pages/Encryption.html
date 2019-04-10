@@ -1,106 +1,183 @@
 <!-- For everything but the Caesar Cipher, we will use the CryptoJS library for our encryption algorithms -->
-
-
 <!DOCTYPE html>
 <html>
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-     <a  href="#"class="navbar-brand"><i class="fas fa-lock">   Password Encryptor</i></a>
-       <ul class="navbar-nav mr-auto">
-         <li class="nav-item">
-           <a href="#" class="nav-link">Saved Passwords</a>
-         </li>
-         <li class="nav-item">
-           <a href="#" class="nav-link">Create Password</a>
-         </li>
-       </ul>
-   </nav>
 <head>
-
 	<title>Encryption Page</title>
+  <!-- css links at the top -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 </head>
 <body>
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+       <a  href="#"class="navbar-brand"><i class="fas fa-lock">   Password Encryptor</i></a>
+         <ul class="navbar-nav mr-auto">
+           <li class="nav-item">
+             <a href="yourpasswords.html" class="nav-link">Saved Passwords</a>
+           </li>
+           <li class="nav-item">
+             <a href="Encryption.html" class="nav-link">Create Password</a>
+           </li>
+         </ul>
+
+         <ul class="navbar-nav ml-auto">
+           <li class="nav-item">
+             <button id="Button" class="nav-link" style="background-color: transparent;color: grey"><i class="far fa-user">   Logout</i></button>
+           </li>
+         </ul>
+     </nav>
+
+     <!-- body content -->
     <div class="container-fluid">
-      <h3>
+      <br>
+      <h2>
         Create Password
-      </h3>
+      </h2>
     </div>
     <br>
       <div class="card bg-light text-dark">
       <div class="card-body">This page allows you to encrypt a password using an encryption algorithm of your choice. Just enter your plaintext password in the box below, select the algorithm you'd like to use, and click the encrypt button.</div>
-      <br>
     </div>
 
-    <div class="container-fluid">
-      <br>
-      <b>Password:</b><br>
-      <input type="text" id="password" name="password" placeholder="Enter Your Password"> 
-      <script type="text/javascript">
-      	function myJsFunction(){
-      		var text=document.getElementById("password").value;
- 		}
- 	    </script>
-      <br>
-      <br>
-    <b>Choose the Encryption Algorithm You Wish To Use From the Following Options:</b><br>
-      <select id="question" name="question">
-      <option value="SHA-2">SHA-2</option>
-      <option value="SHA-512">SHA-512</option>
-      <option value="AES">AES</option>
-      </select>
-      <br>
-      <br>
-      <br>
-      <!-- Button to trigger encryption -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onClick="pr()">
-        Encrypt!
-      </button>
-      <br>
-      <br>
-      <b>Your Encrytpted Password Is:</b><br> 
-      <output type="text" id="out"></output>
+
+    <div class="container-fluid text-center">
+      <div class="row justify-content-md-center">
+          <div class="col-sm-auto">
+            <br>
+            <b>Choose the Encryption Algorithm You Wish To Use From the Following Options:</b><br>
+            <select id="question" name="question" class="form-control">
+              <option value="--">--</option>
+              <option value="3DES">3DES</option>
+              <option value="DES">DES</option>
+              <option value="AES">AES</option>
+              <option value="Caesar Cipher">Caesar</option>
+            </select>
+            <br>
+            <b>Password:</b><br>
+            <input type="text" id="password" name="password" placeholder="Enter Your Password">
+            <br><br>
+            <b>Character Shift:</b><br>
+            <input type="text" id="num_chars" name="num_chars" placeholder="Enter a Number (0-26)" disabled = "true">
+            <br><br>
+            <b>Secret Key:</b> <br>
+            <input type="text" id="key" name="key" placeholder="Enter a Key">
+            <br><br>
+
+            <!-- Button to trigger encryption -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onClick="pr()">
+              Encrypt!
+            </button>
+            <br>
+            <br>
+            <b>Your Encrytpted Password Is:</b><br>
+            <output type="text" id="out"></output>
+            <br>
+            <br>
+            <b id = "info-title">About:</b>
+            <p id = "info-text"></p>
+
+          </div>
+
+        </div>
+      </div>
+
+
       <script>
-          function pr() {
-            
+      // function to update field and toggle wheather or not they input a to "key" or "shift" depending on encrytion algorithm
+      question.addEventListener("change", updateField);
+      function updateField(event) {
+        if (question.value == 'Caesar Cipher') {
+          document.getElementById("num_chars").disabled = false;
+          document.getElementById("key").disabled = true;
+          document.getElementById("info-title").innerHTML = "About the Caesar Cipher:";
+          document.getElementById("info-text").innerHTML = "The Caesar Cipher takes the letters in a string and replaces each one with a letter further down in the alphabet specified by the user.";
+        }
+        else if (question.value == '3DES') {
+          document.getElementById("num_chars").disabled = true;
+          document.getElementById("key").disabled = false;
+          document.getElementById("info-title").innerHTML = "About Tripple DES:";
+          document.getElementById("info-text").innerHTML = "Triple DES is a symmetric-key block cipher, which applies the DES cipher algorithm three times to each data block.";
+        }
+        else if (question.value == 'DES') {
+          document.getElementById("num_chars").disabled = true;
+          document.getElementById("key").disabled = false;
+          document.getElementById("info-title").innerHTML = "About DES:";
+          document.getElementById("info-text").innerHTML = "The Data Encryption Standard  is a symmetric-key algorithm for the encryption of electronic data.";
+        }
+        else if (question.value == 'AES') {
+          document.getElementById("num_chars").disabled = true;
+          document.getElementById("key").disabled = false;
+          document.getElementById("info-title").innerHTML = "About AES:";
+          document.getElementById("info-text").innerHTML = "The Advanced Encryption Standard is a specification for the encryption of electronic data established by NIST in 2001.";
+        }
+        else {
+          document.getElementById("num_chars").disabled = true;
+          document.getElementById("key").disabled = false;
+        }
+      }
+        // function to make password
+        function pr() {
             var question = $("#question").val();
 
-            if (question == "SHA-2") {
+            if (question == "3DES") {
+              var key=document.getElementById("key").value;
               var pass=document.getElementById("password").value;
-              var hash = CryptoJS.HmacSHA256(pass, "Crypto");
-              var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-              hash = hashInBase64
+              var pass=document.getElementById("password").value;
+              var hash = CryptoJS.TripleDES.encrypt(pass, key);
               document.getElementById("out").innerHTML = hash;
 
             } else if (question == "AES") {
+              var key=document.getElementById("key").value;
               var pass=document.getElementById("password").value;
-              var hash = CryptoJS.AES.encrypt(pass, "Crypto");
+              var hash = CryptoJS.AES.encrypt(pass, key);
               document.getElementById("out").innerHTML = hash;
 
-            } else if (question == "SHA-512") {
+            } else if (question == "DES") {
               var pass=document.getElementById("password").value;
-              var hash = CryptoJS.SHA512(pass, "Crypto");
-              var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-              hash = hashInBase64
+              var key=document.getElementById("key").value;
+              var hash = CryptoJS.DES.encrypt(pass, key);
               document.getElementById("out").innerHTML = hash;
-            }
+              
+            } else if (question == "Caesar Cipher") {
+              var pass = document.getElementById("password").value;
+              var num = document.getElementById("num_chars").value;
+              var cipher = '';
+              if(num < 0 || num > 26) {
+                alert("Please Enter a number between 0 and 26");
+              }
+              else {
+                for (var i = 0; i < pass.length; i++) {
+                  var ch = pass.charCodeAt(i);
+                  if(ch >= 65 && ch <= 90) {
+                      if((ch + parseInt(num)) > 90) {
+                        ch = ch + parseInt(num) - 26;
+                      }
+                      else {
+                        ch = ch + parseInt(num);
+                      }
+                  }
+                  else if(ch >= 97 && ch <= 122) {
+                    if((ch + parseInt(num)) > 122) {
+                      ch = ch + parseInt(num) - 26;
+                    }
+                    else {
+                      ch = ch + parseInt(num);
+                    }
+                  }
+                  cipher += String.fromCharCode(ch);
+                  }
+                  document.getElementById("out").innerHTML = cipher;
+              }
+           }
         }
+
+        document.getElementById("Button").onclick = function() {
+          window.location.href = "/Home";
+        };
       </script>
-       <br>
-       <br>
-       <br>
-       <br>
-       <br>
-       <a href="/Home" class="btn btn-info" role="button" >Logout</a>
-
-
-
 </body>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -114,8 +191,6 @@
 <!-- Crypto -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 
-<script src=”http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
-
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
@@ -128,7 +203,7 @@
 
 <script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
 
+<script src="http://crypto-js.googlecode.com/files/2.5.3-crypto-sha1-hmac-pbkdf2-blockmodes-DES.js"></script>
+
 <!-- ajax -->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
-

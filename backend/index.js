@@ -65,8 +65,8 @@ app.get('/login', (request, response) => {
   response.sendFile(__dirname + "/pages/Login.html");
 });
 
-app.get('/new', (request, response) => {
-  response.sendFile(__dirname + "/pages/New.html");
+app.get('/reg_page', (request, response) => {
+  response.sendFile(__dirname + "/pages/reg_page.html");
 });
 
 app.get('/home', (request, response) => {
